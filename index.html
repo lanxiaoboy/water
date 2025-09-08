@@ -15,8 +15,36 @@
       data-logo="1" data-search="1" data-cart="1" data-langs="1" data-downmenu="0"
       data-category-id="153369"
       data-category-allow-child="1"></span>
+  <script>
+(function () {
+  function pickGrid() {
+    var root = document.getElementById('digiseller-body');
+    if (!root) return false;
 
+    // 1) 优先找带 title/aria-label 的按钮（不同语言都尽量覆盖）
+    var btns = root.querySelectorAll('a[title],button[title],a[aria-label],button[aria-label]');
+    for (var i = 0; i < btns.length; i++) {
+      var t = (btns[i].title || btns[i].getAttribute('aria-label') || '').toLowerCase();
+      if (/(tiles|grid|плит|网格)/.test(t)) { btns[i].click(); return true; }
+    }
+    // 2) 兜底：找到“3个并排切换按钮”的容器，点第一个
+    var groups = root.querySelectorAll('div,ul,nav');
+    for (var g = 0; g < groups.length; g++) {
+      var xs = groups[g].querySelectorAll('a,button');
+      if (xs.length === 3) { xs[0].click(); return true; }
+    }
+    return false;
+  }
 
+  // 先试一次；若此时还没渲染出来，用观察者等渲染完成后再点
+  if (!pickGrid()) {
+    var mo = new MutationObserver(function () {
+      if (pickGrid()) mo.disconnect();
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+})();
+</script>
 
 </body>
 </html>
