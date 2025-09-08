@@ -20,17 +20,14 @@
 
     /* Banner / Hero（这里换成你的横幅图片） */
     .hero{
-      /* 一层暗色渐变 + 你的横幅图（桌面端） */
-      background-image:
-        linear-gradient(135deg, rgba(11,16,32,.85), rgba(22,32,69,.65)),
-        url('images/banner-desktop2.jpg'); /* ← 路径/后缀按你上传的文件 */
-      background-size: cover;           /* 自适应铺满 */
-      background-position: 30% center;  /* 焦点在左侧，可改 20%~50% */
-      background-repeat: no-repeat;
-      color:var(--text);
-      padding:48px 16px 36px;
-      min-height: 260px;                /* 想更高就加大 */
-    }
+  background-image: url('image/banner-desktop.jpg'); /* ← 你的桌面图 */
+  background-size: cover;
+  background-position: center center; /* 想偏左就改 30% center */
+  background-repeat: no-repeat;
+  color:#e5e7eb;
+  padding:48px 16px 36px;
+  min-height:260px;
+}
     .hero .inner{max-width:1100px;margin:0 auto;display:flex;gap:24px;align-items:center}
     .brand{
       display:flex;align-items:center;gap:14px;
@@ -56,16 +53,14 @@
     .digiseller-body a:hover{opacity:.9}
 
     /* 手机端：用竖版横幅图 */
-    @media (max-width: 768px){
-      .hero{
-        background-image:
-          linear-gradient(135deg, rgba(11,16,32,.88), rgba(22,32,69,.70)),
-          url('images/banner-mobile.jpg'); /* ← 手机用图 */
-        background-position: center center;
-        padding:36px 16px 28px;
-        min-height: 220px;
-      }
-    }
+   @media (max-width:768px){
+  .hero{
+    background-image: url('image/banner-mobile.jpg'); /* ← 你的手机图 */
+    background-position: center center;
+    padding:36px 16px 28px;
+    min-height:220px;
+  }
+}
 
     /* 页脚 */
     footer{margin:40px 0 24px;text-align:center;color:#777;font-size:13px}
