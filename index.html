@@ -2,49 +2,117 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>My Digital Shop</title>
-
-  <!-- 这行就是“手机适配”，告诉手机按设备宽度排版 -->
+  <title>Cyber Supermarket — Digital Store</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
 
+  <!-- 基础主题样式：简洁、留白、渐变横幅 -->
+  <style>
+    :root{
+      --bg:#0b1020;         /* 深色背景（横幅用） */
+      --card:#0f152a;       /* 横幅内卡片色 */
+      --primary:#7c3aed;    /* 主题紫 */
+      --accent:#06b6d4;     /* 主题蓝青 */
+      --text:#e5e7eb;       /* 浅色文字 */
+      --body:#0a0a0a;       /* 页面背景 */
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#fff;color:#222}
+    a{text-decoration:none;color:inherit}
+
+    /* 顶部横幅 */
+    .hero{
+      background: linear-gradient(135deg, var(--bg) 0%, #162045 100%);
+      color:var(--text);
+      padding:48px 16px 36px;
+    }
+    .hero .inner{max-width:1100px;margin:0 auto;display:flex;gap:24px;align-items:center}
+    .brand{
+      display:flex;align-items:center;gap:14px;
+      background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.12);
+      padding:10px 14px;border-radius:12px;
+    }
+    .brand img{width:40px;height:40px;object-fit:contain}
+    .title{font-size:28px;font-weight:700;line-height:1.05}
+    .tagline{opacity:.85;font-size:14px;margin-top:4px}
+    .cta{
+      margin-left:auto;display:flex;gap:12px;flex-wrap:wrap
+    }
+    .btn{
+      padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);
+      background:linear-gradient(135deg, var(--primary), var(--accent));
+      color:white;font-weight:600
+    }
+    .btn.ghost{
+      background:transparent;color:var(--text)
+    }
+
+    /* 主体容器（小部件外壳） */
+    .wrap{max-width:1100px;margin:24px auto;padding:0 16px}
+
+    /* 可选：轻微美化小部件外围链接 */
+    .digiseller-body a:hover{opacity:.9}
+
+    /* 页脚 */
+    footer{margin:40px 0 24px;text-align:center;color:#777;font-size:13px}
+  </style>
+</head>
 <body>
-  <script>!function(e){var l=function(l){return e.cookie.match(new RegExp("(?:^|; )digiseller-"+l+"=([^;]*)"))},i=l("lang"),s=l("cart_uid"),t=i?"&lang="+i[1]:"",d=s?"&cart_uid="+s[1]:"",r=e.getElementsByTagName("head")[0]||e.documentElement,n=e.createElement("link"),a=e.createElement("script");n.type="text/css",n.rel="stylesheet",n.id="digiseller-css",n.href="//shop.digiseller.com/xml/store2_css.asp?seller_id=1410772",a.async=!0,a.id="digiseller-js",a.src="//digiseller.com/store2/digiseller-api.js.asp?seller_id=1410772"+t+d,!e.getElementById(n.id)&&r.appendChild(n),!e.getElementById(a.id)&&r.appendChild(a)}(document);</script>
+
+  <!-- 顶部横幅 / 品牌区 -->
+  <header class="hero">
+    <div class="inner">
+      <div class="brand">
+        <!-- 把 logo.png 放到仓库根目录；没有也没关系，会显示占位圆点 -->
+        <img src="logo.png" alt="Logo" onerror="this.style.display='none'">
+        <div>
+          <div class="title">Cyber Supermarket</div>
+          <div class="tagline">Instant digital goods • Secure checkout</div>
+        </div>
+      </div>
+      <div class="cta">
+        <a class="btn" href="#shop">Browse products</a>
+        <a class="btn ghost" href="mailto:support@example.com">Support</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 商品区域（你的 DigiSeller 小部件） -->
+  <main class="wrap" id="shop">
+    <!-- 1) 保留脚本；2) 关闭小部件自带 logo & 下方菜单；3) 只展示指定分类 -->
+    <script>!function(e){var l=function(l){return e.cookie.match(new RegExp("(?:^|; )digiseller-"+l+"=([^;]*)"))},i=l("lang"),s=l("cart_uid"),t=i?"&lang="+i[1]:"",d=s?"&cart_uid="+s[1]:"",r=e.getElementsByTagName("head")[0]||e.documentElement,n=e.createElement("link"),a=e.createElement("script");n.type="text/css",n.rel="stylesheet",n.id="digiseller-css",n.href="//shop.digiseller.com/xml/store2_css.asp?seller_id=1410772",a.async=!0,a.id="digiseller-js",a.src="//digiseller.com/store2/digiseller-api.js.asp?seller_id=1410772"+t+d,!e.getElementById(n.id)&&r.appendChild(n),!e.getElementById(a.id)&&r.appendChild(a)}(document);</script>
 
     <span class="digiseller-body" id="digiseller-body"
-      data-logo="1" data-search="1" data-cart="1" data-langs="1" data-downmenu="0"
-      data-category-id="153369"
-      data-category-allow-child="1"></span>
+          data-cat="h" data-logo="0" data-downmenu="0"
+          data-purchases="1" data-langs="1" data-cart="1" data-search="1"
+          data-category-id="YOUR_CATEGORY_ID" data-category-allow-child="1"></span>
+  </main>
+
+  <!-- 默认切换到“九宫格”视图 -->
   <script>
-(function () {
-  function pickGrid() {
-    var root = document.getElementById('digiseller-body');
-    if (!root) return false;
-
-    // 1) 优先找带 title/aria-label 的按钮（不同语言都尽量覆盖）
-    var btns = root.querySelectorAll('a[title],button[title],a[aria-label],button[aria-label]');
-    for (var i = 0; i < btns.length; i++) {
-      var t = (btns[i].title || btns[i].getAttribute('aria-label') || '').toLowerCase();
-      if (/(tiles|grid|плит|网格)/.test(t)) { btns[i].click(); return true; }
+  (function () {
+    function pickGrid() {
+      var root = document.getElementById('digiseller-body');
+      if (!root) return false;
+      var btns = root.querySelectorAll('a[title],button[title],a[aria-label],button[aria-label]');
+      for (var i = 0; i < btns.length; i++) {
+        var t = (btns[i].title || btns[i].getAttribute('aria-label') || '').toLowerCase();
+        if (/(tiles|grid|плит|网格)/.test(t)) { btns[i].click(); return true; }
+      }
+      var groups = root.querySelectorAll('div,ul,nav');
+      for (var g = 0; g < groups.length; g++) {
+        var xs = groups[g].querySelectorAll('a,button');
+        if (xs.length === 3) { xs[0].click(); return true; }
+      }
+      return false;
     }
-    // 2) 兜底：找到“3个并排切换按钮”的容器，点第一个
-    var groups = root.querySelectorAll('div,ul,nav');
-    for (var g = 0; g < groups.length; g++) {
-      var xs = groups[g].querySelectorAll('a,button');
-      if (xs.length === 3) { xs[0].click(); return true; }
+    if (!pickGrid()) {
+      var mo = new MutationObserver(function () { if (pickGrid()) mo.disconnect(); });
+      mo.observe(document.body, { childList: true, subtree: true });
     }
-    return false;
-  }
+  })();
+  </script>
 
-  // 先试一次；若此时还没渲染出来，用观察者等渲染完成后再点
-  if (!pickGrid()) {
-    var mo = new MutationObserver(function () {
-      if (pickGrid()) mo.disconnect();
-    });
-    mo.observe(document.body, { childList: true, subtree: true });
-  }
-})();
-</script>
-
+  <footer>© 2025 Cyber Supermarket · Powered by DigiSeller</footer>
 </body>
 </html>
