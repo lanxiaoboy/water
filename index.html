@@ -5,53 +5,56 @@
   <title>Cyber Supermarket — Digital Store</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- 可选的分享/预览信息（保留即可） -->
+  <!-- SEO / 分享（保持不变） -->
   <meta name="description" content="Instant digital goods with secure checkout. Cyber Supermarket — fast delivery, reliable service." />
   <meta property="og:title" content="Cyber Supermarket — Digital Store" />
   <meta property="og:description" content="Instant digital goods • Secure checkout" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="images/banner-desktop.jpg" />
   <meta property="og:url" content="https://cybersupermarket.netlify.app/" />
-
   <link rel="preload" href="images/banner-desktop.jpg" as="image" />
 
   <style>
-    :root{
-      --primary:#7c3aed;
-      --accent:#06b6d4;
-      --text:#e5e7eb;
-    }
+    :root{ --primary:#7c3aed; --accent:#06b6d4; --text:#e5e7eb; }
     *{box-sizing:border-box}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#fff;color:#222}
     a{text-decoration:none;color:inherit}
 
-    /* Banner / Hero：高度缩小到原来的约 2/3，背景对齐到顶部 */
+    /* Banner / Hero（保持 A3 的高度与对齐） */
     .hero{
       background-image: url('images/banner-desktop.jpg');
       background-size: cover;
-      background-position: top center;   /* 只保留上方区域 */
+      background-position: top center;
       background-repeat: no-repeat;
       color:var(--text);
-      padding:32px 16px 20px;            /* 之前是 48/36，底部留白更小 */
-      min-height:176px;                  /* 之前是 260px → 约 2/3 */
+      padding:32px 16px 20px;
+      min-height:176px;
     }
     .hero .inner{max-width:1100px;margin:0 auto;display:flex;gap:18px;align-items:center}
 
-    /* 品牌区：左图右文（使用你的 images/logo1.jpg） */
+    /* 品牌区：仅 LOGO + 副标题 */
     .brand{
-      display:flex;align-items:center;gap:14px;
+      display:flex;align-items:center;gap:16px;
       background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
       border:1px solid rgba(255,255,255,.12);
       padding:10px 14px;border-radius:12px;
       backdrop-filter: blur(2px);
     }
+    /* LOGO 放大 2 倍：60->120（桌面），44->88（移动） */
     .brand .logo{
-      width:60px; height:60px; object-fit:cover;
+      width:120px; height:120px; object-fit:cover;
       border-radius:12px; border:1px solid rgba(255,255,255,.18);
       box-shadow:0 6px 18px rgba(0,0,0,.18);
     }
-    .title{font-size:28px;font-weight:700;line-height:1.05;text-shadow:0 2px 8px rgba(0,0,0,.25)}
-    .tagline{opacity:.92;font-size:14px;margin-top:4px;text-shadow:0 1px 6px rgba(0,0,0,.25)}
+    /* 去掉标题，仅保留副标题并增强可读性 */
+    .tagline{
+      font-size:18px;                /* A3 的 14 → 18 */
+      font-weight:600;
+      opacity:.96;
+      text-shadow:0 1px 6px rgba(0,0,0,.28);
+      margin:0;                      /* 与 LOGO 垂直对齐 */
+    }
+
     .cta{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
     .btn{
       padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);
@@ -60,24 +63,21 @@
     }
     .btn.ghost{background:transparent;color:var(--text)}
 
-    /* 主体容器（小部件外壳） */
     .wrap{max-width:1100px;margin:24px auto;padding:0 16px}
-
-    /* 轻微 hover 效果 */
     .digiseller-body a:hover{opacity:.9}
 
-    /* 手机端：同样只显示上方区域，LOGO 略小，Banner 更矮一点 */
+    /* 移动端：LOGO 88×88，副标题稍小 */
     @media (max-width:768px){
       .hero{
         background-image: url('images/banner-mobile.jpg');
         background-position: top center;
         padding:24px 16px 16px;
-        min-height:150px;                /* 之前 220 → 约 2/3 */
+        min-height:150px;
       }
-      .brand .logo{ width:44px; height:44px; border-radius:10px }
+      .brand .logo{ width:88px; height:88px }
+      .tagline{ font-size:16px }
     }
 
-    /* 页脚 */
     footer{margin:40px 0 24px;text-align:center;color:#777;font-size:13px}
   </style>
 </head>
@@ -87,12 +87,10 @@
   <header class="hero">
     <div class="inner">
       <div class="brand">
-        <!-- 使用你的独立 LOGO 图片 -->
+        <!-- LOGO：使用 images/logo1.jpg -->
         <img class="logo" src="images/logo1.jpg" alt="Cyber Supermarket Logo" onerror="this.style.display='none'">
-        <div>
-          <div class="title">Cyber Supermarket</div>
-          <div class="tagline">Instant digital goods • Secure checkout</div>
-        </div>
+        <!-- 只保留副标题 -->
+        <p class="tagline">Instant digital goods • Secure checkout</p>
       </div>
       <div class="cta">
         <a class="btn" href="#shop">Browse products</a>
@@ -101,7 +99,7 @@
     </div>
   </header>
 
-  <!-- 商品区域（DigiSeller 小部件） -->
+  <!-- 商品区域（保持不变） -->
   <main class="wrap" id="shop">
     <script>
       !function(e){
@@ -119,14 +117,12 @@
       }(document);
     </script>
 
-    <!-- A2 里你已开启 data-downmenu=1，这里继续保持；也保留小部件的 logo 显示 -->
     <span class="digiseller-body" id="digiseller-body"
       data-logo="1" data-search="1" data-cart="1" data-langs="1" data-downmenu="1"
-      data-category-id="153369"
-      data-category-allow-child="1"></span>
+      data-category-id="153369" data-category-allow-child="1"></span>
   </main>
 
-  <!-- 默认切到“九宫格”视图 -->
+  <!-- 默认九宫格视图（保持不变） -->
   <script>
     (function () {
       function pickGrid() {
