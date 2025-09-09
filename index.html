@@ -5,11 +5,19 @@
   <title>Cyber Supermarket — Digital Store</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- 主题样式（含 Banner 背景图：image/banner-desktop.jpg & image/banner-mobile.jpg） -->
+  <!-- SEO / 分享 -->
+  <meta name="description" content="Instant digital goods with secure checkout. Cyber Supermarket — fast delivery, reliable service." />
+  <meta property="og:title" content="Cyber Supermarket — Digital Store" />
+  <meta property="og:description" content="Instant digital goods • Secure checkout" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/banner-desktop.jpg" />
+  <meta property="og:url" content="https://cybersupermarket.netlify.app/" />
+
+  <!-- 预加载首屏 Banner，提升首屏速度 -->
+  <link rel="preload" href="images/banner-desktop.jpg" as="image" />
+
   <style>
     :root{
-      --bg:#0b1020;
-      --card:#0f152a;
       --primary:#7c3aed;
       --accent:#06b6d4;
       --text:#e5e7eb;
@@ -18,26 +26,28 @@
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#fff;color:#222}
     a{text-decoration:none;color:inherit}
 
-    /* Banner / Hero（这里换成你的横幅图片） */
+    /* Banner / Hero（使用你的原图色，不加遮罩） */
     .hero{
-  background-image: url('images/banner-desktop.jpg'); /* ← 你的桌面图 */
-  background-size: cover;
-  background-position: center center; /* 想偏左就改 30% center */
-  background-repeat: no-repeat;
-  color:#e5e7eb;
-  padding:48px 16px 36px;
-  min-height:260px;
-}
+      background-image: url('images/banner-desktop.jpg');
+      background-size: cover;
+      background-position: center center; /* 想偏左可改为 30% center */
+      background-repeat: no-repeat;
+      color:var(--text);
+      padding:48px 16px 36px;
+      min-height:260px;
+    }
     .hero .inner{max-width:1100px;margin:0 auto;display:flex;gap:24px;align-items:center}
+
     .brand{
       display:flex;align-items:center;gap:14px;
       background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
       border:1px solid rgba(255,255,255,.12);
       padding:10px 14px;border-radius:12px;
+      backdrop-filter: blur(2px);
     }
     .brand img{width:40px;height:40px;object-fit:contain}
-    .title{font-size:28px;font-weight:700;line-height:1.05}
-    .tagline{opacity:.85;font-size:14px;margin-top:4px}
+    .title{font-size:28px;font-weight:700;line-height:1.05; text-shadow:0 2px 8px rgba(0,0,0,.25);}
+    .tagline{opacity:.92;font-size:14px;margin-top:4px; text-shadow:0 1px 6px rgba(0,0,0,.25);}
     .cta{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
     .btn{
       padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);
@@ -46,21 +56,21 @@
     }
     .btn.ghost{background:transparent;color:var(--text)}
 
-    /* 主体容器（小部件外壳） */
+    /* 主体容器 */
     .wrap{max-width:1100px;margin:24px auto;padding:0 16px}
 
-    /* 轻微美化 */
+    /* 轻微 hover 效果 */
     .digiseller-body a:hover{opacity:.9}
 
-    /* 手机端：用竖版横幅图 */
-   @media (max-width:768px){
-  .hero{
-    background-image: url('images/banner-mobile.jpg'); /* ← 你的手机图 */
-    background-position: center center;
-    padding:36px 16px 28px;
-    min-height:220px;
-  }
-}
+    /* 手机端 Banner 使用竖图 */
+    @media (max-width:768px){
+      .hero{
+        background-image: url('images/banner-mobile.jpg');
+        background-position: center center;
+        padding:36px 16px 28px;
+        min-height:220px;
+      }
+    }
 
     /* 页脚 */
     footer{margin:40px 0 24px;text-align:center;color:#777;font-size:13px}
@@ -88,7 +98,6 @@
 
   <!-- 商品区域（DigiSeller 小部件） -->
   <main class="wrap" id="shop">
-    <!-- 外部样式 & 脚本加载（保持 seller_id 不变即可） -->
     <script>
       !function(e){
         var l=function(l){return e.cookie.match(new RegExp("(?:^|; )digiseller-"+l+"=([^;]*)"))},
@@ -105,38 +114,9 @@
       }(document);
     </script>
 
-    <!-- 这里关闭小部件自带的 logo/底部菜单；如需只展示某分类，可添加 data-category-id="你的分类ID" -->
+    <!-- 关闭小部件自带 logo，避免与上方品牌重复；保留搜索/购物车/语言 -->
     <span class="digiseller-body" id="digiseller-body"
-      data-logo="1" data-search="1" data-cart="1" data-langs="1" data-downmenu="0"
+      data-logo="0" data-search="1" data-cart="1" data-langs="1" data-downmenu="0"
       data-category-id="153369"
       data-category-allow-child="1"></span>
-  </main>
-
-  <!-- 进入页面后，默认切换到“九宫格”视图 -->
-  <script>
-    (function () {
-      function pickGrid() {
-        var root = document.getElementById('digiseller-body');
-        if (!root) return false;
-        var btns = root.querySelectorAll('a[title],button[title],a[aria-label],button[aria-label]');
-        for (var i = 0; i < btns.length; i++) {
-          var t = (btns[i].title || btns[i].getAttribute('aria-label') || '').toLowerCase();
-          if (/(tiles|grid|плит|网格)/.test(t)) { btns[i].click(); return true; }
-        }
-        var groups = root.querySelectorAll('div,ul,nav');
-        for (var g = 0; g < groups.length; g++) {
-          var xs = groups[g].querySelectorAll('a,button');
-          if (xs.length === 3) { xs[0].click(); return true; }
-        }
-        return false;
-      }
-      if (!pickGrid()) {
-        var mo = new MutationObserver(function () { if (pickGrid()) mo.disconnect(); });
-        mo.observe(document.body, { childList: true, subtree: true });
-      }
-    })();
-  </script>
-
-  <footer>© 2025 Cyber Supermarket · Powered by DigiSeller</footer>
-</body>
-</html>
+  </mai
