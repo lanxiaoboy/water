@@ -112,3 +112,45 @@
             n=e.createElement("link"), a=e.createElement("script");
         n.type="text/css"; n.rel="stylesheet"; n.id="digiseller-css";
         n.href="//shop.digiseller.com/xml/store2_css.asp?seller_id=1410772";
+        a.async=!0; a.id="digiseller-js";
+        a.src="//digiseller.com/store2/digiseller-api.js.asp?seller_id=1410772"+t+d;
+        !e.getElementById(n.id)&&r.appendChild(n);
+        !e.getElementById(a.id)&&r.appendChild(a)
+      }(document);
+    </script>
+
+    <!-- A2 里你已开启 data-downmenu=1，这里继续保持；也保留小部件的 logo 显示 -->
+    <span class="digiseller-body" id="digiseller-body"
+      data-logo="1" data-search="1" data-cart="1" data-langs="1" data-downmenu="1"
+      data-category-id="153369"
+      data-category-allow-child="1"></span>
+  </main>
+
+  <!-- 默认切到“九宫格”视图 -->
+  <script>
+    (function () {
+      function pickGrid() {
+        var root = document.getElementById('digiseller-body');
+        if (!root) return false;
+        var btns = root.querySelectorAll('a[title],button[title],a[aria-label],button[aria-label]');
+        for (var i = 0; i < btns.length; i++) {
+          var t = (btns[i].title || btns[i].getAttribute('aria-label') || '').toLowerCase();
+          if (/(tiles|grid|плит|网格)/.test(t)) { btns[i].click(); return true; }
+        }
+        var groups = root.querySelectorAll('div,ul,nav');
+        for (var g = 0; g < groups.length; g++) {
+          var xs = groups[g].querySelectorAll('a,button');
+          if (xs.length === 3) { xs[0].click(); return true; }
+        }
+        return false;
+      }
+      if (!pickGrid()) {
+        var mo = new MutationObserver(function () { if (pickGrid()) mo.disconnect(); });
+        mo.observe(document.body, { childList: true, subtree: true });
+      }
+    })();
+  </script>
+
+  <footer>© 2025 Cyber Supermarket · Powered by DigiSeller</footer>
+</body>
+</html>
