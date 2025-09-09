@@ -5,7 +5,7 @@
   <title>Cyber Supermarket — Digital Store</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- SEO / 分享 -->
+  <!-- 可选的分享/预览信息（保留即可） -->
   <meta name="description" content="Instant digital goods with secure checkout. Cyber Supermarket — fast delivery, reliable service." />
   <meta property="og:title" content="Cyber Supermarket — Digital Store" />
   <meta property="og:description" content="Instant digital goods • Secure checkout" />
@@ -13,7 +13,6 @@
   <meta property="og:image" content="images/banner-desktop.jpg" />
   <meta property="og:url" content="https://cybersupermarket.netlify.app/" />
 
-  <!-- 预加载首屏 Banner，提升首屏速度 -->
   <link rel="preload" href="images/banner-desktop.jpg" as="image" />
 
   <style>
@@ -26,18 +25,19 @@
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#fff;color:#222}
     a{text-decoration:none;color:inherit}
 
-    /* Banner / Hero（使用你的原图色，不加遮罩） */
+    /* Banner / Hero：高度缩小到原来的约 2/3，背景对齐到顶部 */
     .hero{
       background-image: url('images/banner-desktop.jpg');
       background-size: cover;
-      background-position: center center; /* 想偏左可改为 30% center */
+      background-position: top center;   /* 只保留上方区域 */
       background-repeat: no-repeat;
       color:var(--text);
-      padding:48px 16px 36px;
-      min-height:260px;
+      padding:32px 16px 20px;            /* 之前是 48/36，底部留白更小 */
+      min-height:176px;                  /* 之前是 260px → 约 2/3 */
     }
-    .hero .inner{max-width:1100px;margin:0 auto;display:flex;gap:24px;align-items:center}
+    .hero .inner{max-width:1100px;margin:0 auto;display:flex;gap:18px;align-items:center}
 
+    /* 品牌区：左图右文（使用你的 images/logo1.jpg） */
     .brand{
       display:flex;align-items:center;gap:14px;
       background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
@@ -45,9 +45,13 @@
       padding:10px 14px;border-radius:12px;
       backdrop-filter: blur(2px);
     }
-    .brand img{width:40px;height:40px;object-fit:contain}
-    .title{font-size:28px;font-weight:700;line-height:1.05; text-shadow:0 2px 8px rgba(0,0,0,.25);}
-    .tagline{opacity:.92;font-size:14px;margin-top:4px; text-shadow:0 1px 6px rgba(0,0,0,.25);}
+    .brand .logo{
+      width:60px; height:60px; object-fit:cover;
+      border-radius:12px; border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 6px 18px rgba(0,0,0,.18);
+    }
+    .title{font-size:28px;font-weight:700;line-height:1.05;text-shadow:0 2px 8px rgba(0,0,0,.25)}
+    .tagline{opacity:.92;font-size:14px;margin-top:4px;text-shadow:0 1px 6px rgba(0,0,0,.25)}
     .cta{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
     .btn{
       padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.25);
@@ -56,20 +60,21 @@
     }
     .btn.ghost{background:transparent;color:var(--text)}
 
-    /* 主体容器 */
+    /* 主体容器（小部件外壳） */
     .wrap{max-width:1100px;margin:24px auto;padding:0 16px}
 
     /* 轻微 hover 效果 */
     .digiseller-body a:hover{opacity:.9}
 
-    /* 手机端 Banner 使用竖图 */
+    /* 手机端：同样只显示上方区域，LOGO 略小，Banner 更矮一点 */
     @media (max-width:768px){
       .hero{
         background-image: url('images/banner-mobile.jpg');
-        background-position: center center;
-        padding:36px 16px 28px;
-        min-height:220px;
+        background-position: top center;
+        padding:24px 16px 16px;
+        min-height:150px;                /* 之前 220 → 约 2/3 */
       }
+      .brand .logo{ width:44px; height:44px; border-radius:10px }
     }
 
     /* 页脚 */
@@ -82,8 +87,8 @@
   <header class="hero">
     <div class="inner">
       <div class="brand">
-        <!-- 若仓库根目录没有 logo.png，会自动隐藏 -->
-        <img src="logo.png" alt="Logo" onerror="this.style.display='none'">
+        <!-- 使用你的独立 LOGO 图片 -->
+        <img class="logo" src="images/logo1.jpg" alt="Cyber Supermarket Logo" onerror="this.style.display='none'">
         <div>
           <div class="title">Cyber Supermarket</div>
           <div class="tagline">Instant digital goods • Secure checkout</div>
@@ -107,16 +112,3 @@
             n=e.createElement("link"), a=e.createElement("script");
         n.type="text/css"; n.rel="stylesheet"; n.id="digiseller-css";
         n.href="//shop.digiseller.com/xml/store2_css.asp?seller_id=1410772";
-        a.async=!0; a.id="digiseller-js";
-        a.src="//digiseller.com/store2/digiseller-api.js.asp?seller_id=1410772"+t+d;
-        !e.getElementById(n.id)&&r.appendChild(n);
-        !e.getElementById(a.id)&&r.appendChild(a)
-      }(document);
-    </script>
-
-    <!-- 关闭小部件自带 logo，避免与上方品牌重复；保留搜索/购物车/语言 -->
-    <span class="digiseller-body" id="digiseller-body"
-      data-logo="0" data-search="1" data-cart="1" data-langs="1" data-downmenu="1"
-      data-category-id="153369"
-      data-category-allow-child="1"></span>
-  </mai
