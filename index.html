@@ -5,7 +5,7 @@
   <title>Cyber Supermarket — Digital Store</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- SEO / 分享（保持不变） -->
+  <!-- SEO / 分享 -->
   <meta name="description" content="Instant digital goods with secure checkout. Cyber Supermarket — fast delivery, reliable service." />
   <meta property="og:title" content="Cyber Supermarket — Digital Store" />
   <meta property="og:description" content="Instant digital goods • Secure checkout" />
@@ -13,7 +13,7 @@
   <meta property="og:image" content="images/banner-desktop.jpg" />
   <meta property="og:url" content="https://cybersupermarket.netlify.app/" />
 
-  <!-- 预加载：Banner 与 站点背景图 -->
+  <!-- 预加载：Banner 与 背景图 -->
   <link rel="preload" href="images/banner-desktop.jpg" as="image" />
   <link rel="preload" href="images/bg1.jpg" as="image" />
 
@@ -21,32 +21,39 @@
     :root{ --primary:#7c3aed; --accent:#06b6d4; --text:#e5e7eb; }
     *{box-sizing:border-box}
 
-    /* A8：使用 bg1.jpg 作为整站背景（桌面固定、移动端滚动），无任何叠加色 */
+    /* 站点通用背景：使用 bg1.jpg（桌面固定/移动滚动） */
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:#222;
       background-image: url('images/bg1.jpg');
-      background-size: cover;          /* 自适应铺满 */
-      background-position: center top;  /* 可按需改成 center center / top 30% */
+      background-size: cover;
+      background-position: center top;
       background-repeat: no-repeat;
-      background-attachment: fixed;     /* 桌面视觉更稳 */
+      background-attachment: fixed;
     }
     a{text-decoration:none;color:inherit}
 
-    /* Banner / Hero（保持原样） */
+    /* ===== Banner / Hero =====
+       高度 = 内部磨砂卡片高度（上下 padding=0），不再额外占高 */
     .hero{
       background-image: url('images/banner-desktop.jpg');
       background-size: cover;
       background-position: top center;
       background-repeat: no-repeat;
       color:var(--text);
-      padding:32px 16px 20px;
-      min-height:176px;
+      padding:0 16px;           /* 只保留左右间距，去掉上下 */
+      /* 去掉原有 min-height */
     }
-    .hero .inner{max-width:1100px;margin:0 auto;display:flex;gap:18px;align-items:center}
+    .hero .inner{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      gap:18px;
+      align-items:center;       /* 使按钮与卡片垂直居中 */
+    }
 
-    /* 品牌区（维持 A6/A7 的布局与尺寸） */
+    /* 磨砂卡片（LOGO + 两行副标题） */
     .brand{
       display:flex;align-items:center;gap:16px;
       background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
@@ -55,20 +62,15 @@
       backdrop-filter: blur(2px);
     }
     .brand .logo{
-      width:150px; height:150px; object-fit:cover;
-      border-radius:12px; border:1px solid rgba(255,255,255,.18);
+      width:150px;height:150px;object-fit:cover;
+      border-radius:12px;border:1px solid rgba(255,255,255,.18);
       box-shadow:0 6px 18px rgba(0,0,0,.18);
       flex:0 0 auto;
     }
     .tagline{
-      font-size:40px;
-      font-weight:1000;
-      line-height:1.4;
-      margin:0;
-      opacity:.98;
+      font-size:40px;font-weight:1000;line-height:1.4;
+      margin:0;opacity:.98;white-space:normal;text-align:center;
       text-shadow:0 1px 6px rgba(0,0,0,.28);
-      white-space:normal;
-      text-align:center;
     }
 
     .cta{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
@@ -81,14 +83,11 @@
 
     .wrap{max-width:1100px;margin:24px auto;padding:0 16px}
 
-    /* —— 保持 DigiSeller 小部件白底透明 + 卡片样式（来自 A7，不改） —— */
+    /* DigiSeller 小部件：外层透明，卡片白底 */
     .digiseller-body,
     .digiseller-body > div,
-    .digiseller-body > div > div{
-      background: transparent !important;
-    }
+    .digiseller-body > div > div{ background: transparent !important; }
     .digiseller-body [style*="#fff"]{ background-color: transparent !important; }
-
     .digiseller-body .item,
     .digiseller-body .product,
     .digiseller-body .goods-item,
@@ -96,25 +95,19 @@
     .digiseller-body .good-item,
     .digiseller-body .list .block,
     .digiseller-body .catalog-item{
-      background:#fff !important;
-      border-radius:10px !important;
+      background:#fff !important;border-radius:10px !important;
       box-shadow:0 6px 20px rgba(0,0,0,.06) !important;
     }
-    /* ———————————————————————————————————————————————— */
 
-    /* 移动端：背景改为滚动，避免 iOS 上的 fixed 问题；Banner 用竖图 */
+    /* 移动端：背景改为滚动；Banner 同样没有上下 padding */
     @media (max-width:768px){
-      body{
-        background-attachment: scroll;
-        background-position: center center;
-      }
+      body{ background-attachment: scroll; background-position: center center; }
       .hero{
         background-image: url('images/banner-mobile.jpg');
         background-position: top center;
-        padding:24px 16px 16px;
-        min-height:150px;
+        padding:0 16px;         /* 与桌面一致：仅左右间距 */
       }
-      .brand .logo{ width:110px; height:110px }
+      .brand .logo{ width:110px;height:110px }
       .tagline{ font-size:18px; line-height:1.3 }
     }
 
