@@ -18,21 +18,20 @@
     :root{ --primary:#7c3aed; --accent:#06b6d4; --text:#e5e7eb; }
     *{box-sizing:border-box}
 
-    /* A6：将页面底色从纯白改为浅雾蓝 + 极淡紫/蓝渐变 */
+    /* A7：更深的冷灰底色 + 极淡的主题光晕 */
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:#222;
-      /* 基底：很浅的冷蓝灰（看起来仍接近白） */
       background:
-        radial-gradient(1200px 600px at 50% -200px, rgba(124,58,237,0.06), transparent 60%),  /* 来自 --primary 的极淡紫光 */
-        radial-gradient(800px 400px at 95% 0,       rgba(6,182,212,0.05),  transparent 55%),  /* 来自 --accent 的极淡蓝光 */
-        #F0F5FF; /* 推荐基色 */
+        radial-gradient(1200px 600px at 50% -200px, rgba(124,58,237,0.08), transparent 60%),
+        radial-gradient(800px 400px at 95% 0,       rgba(6,182,212,0.06),  transparent 55%),
+        #ECEFF4; /* 更深一点的冷灰 */
     }
 
     a{text-decoration:none;color:inherit}
 
-    /* Banner / Hero（保持 A5 的高度与对齐） */
+    /* Banner / Hero（同 A6） */
     .hero{
       background-image: url('images/banner-desktop.jpg');
       background-size: cover;
@@ -44,7 +43,7 @@
     }
     .hero .inner{max-width:1100px;margin:0 auto;display:flex;gap:18px;align-items:center}
 
-    /* 品牌区（A5 保持不变）：LOGO 150×150，右侧副标题两行 */
+    /* 品牌区（维持 A6 / A5 的布局与尺寸） */
     .brand{
       display:flex;align-items:center;gap:16px;
       background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
@@ -60,7 +59,7 @@
     }
     .tagline{
       font-size:40px;
-      font-weight:1000; /* 你在 A5 的设置，保留 */
+      font-weight:1000;
       line-height:1.4;
       margin:0;
       opacity:.98;
@@ -78,9 +77,32 @@
     .btn.ghost{background:transparent;color:var(--text)}
 
     .wrap{max-width:1100px;margin:24px auto;padding:0 16px}
-    .digiseller-body a:hover{opacity:.9}
 
-    /* 移动端（保持 A5 不变）：Banner 用手机图，Logo 110×110，副标题略小 */
+    /* ------------ A7：覆盖 DigiSeller 小部件白底 ------------ */
+    /* 让外层容器透明，露出站点的底色 */
+    .digiseller-body,
+    .digiseller-body > div,
+    .digiseller-body > div > div{
+      background: transparent !important;
+    }
+    /* 兜底：把写死为 #fff 的内联背景也抹掉 */
+    .digiseller-body [style*="#fff"]{ background-color: transparent !important; }
+
+    /* 商品卡片仍为白色，配圆角与柔和阴影（类名写得稍广，尽量兼容不同主题） */
+    .digiseller-body .item,
+    .digiseller-body .product,
+    .digiseller-body .goods-item,
+    .digiseller-body .goods_item,
+    .digiseller-body .good-item,
+    .digiseller-body .list .block,
+    .digiseller-body .catalog-item{
+      background:#fff !important;
+      border-radius:10px !important;
+      box-shadow:0 6px 20px rgba(0,0,0,.06) !important;
+    }
+    /* -------------------------------------------------------- */
+
+    /* 移动端 */
     @media (max-width:768px){
       .hero{
         background-image: url('images/banner-mobile.jpg');
