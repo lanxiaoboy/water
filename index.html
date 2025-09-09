@@ -17,10 +17,22 @@
   <style>
     :root{ --primary:#7c3aed; --accent:#06b6d4; --text:#e5e7eb; }
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#fff;color:#222}
+
+    /* A6：将页面底色从纯白改为浅雾蓝 + 极淡紫/蓝渐变 */
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:#222;
+      /* 基底：很浅的冷蓝灰（看起来仍接近白） */
+      background:
+        radial-gradient(1200px 600px at 50% -200px, rgba(124,58,237,0.06), transparent 60%),  /* 来自 --primary 的极淡紫光 */
+        radial-gradient(800px 400px at 95% 0,       rgba(6,182,212,0.05),  transparent 55%),  /* 来自 --accent 的极淡蓝光 */
+        #F6F8FF; /* 推荐基色 */
+    }
+
     a{text-decoration:none;color:inherit}
 
-    /* Banner / Hero（与 A4 相同） */
+    /* Banner / Hero（保持 A5 的高度与对齐） */
     .hero{
       background-image: url('images/banner-desktop.jpg');
       background-size: cover;
@@ -32,7 +44,7 @@
     }
     .hero .inner{max-width:1100px;margin:0 auto;display:flex;gap:18px;align-items:center}
 
-    /* 品牌区：LOGO 放大到 150×150，右侧仅副标题（两行） */
+    /* 品牌区（A5 保持不变）：LOGO 150×150，右侧副标题两行 */
     .brand{
       display:flex;align-items:center;gap:16px;
       background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
@@ -47,14 +59,14 @@
       flex:0 0 auto;
     }
     .tagline{
-      font-size:40px;               /* A4 的 18 → 22 */
-      font-weight:1000;
+      font-size:40px;
+      font-weight:1000; /* 你在 A5 的设置，保留 */
       line-height:1.4;
-      margin:0;                     /* 与 LOGO 垂直对齐 */
+      margin:0;
       opacity:.98;
       text-shadow:0 1px 6px rgba(0,0,0,.28);
       white-space:normal;
-      text-align: center;
+      text-align:center;
     }
 
     .cta{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
@@ -68,7 +80,7 @@
     .wrap{max-width:1100px;margin:24px auto;padding:0 16px}
     .digiseller-body a:hover{opacity:.9}
 
-    /* 移动端：LOGO 110×110，副标题略小 */
+    /* 移动端（保持 A5 不变）：Banner 用手机图，Logo 110×110，副标题略小 */
     @media (max-width:768px){
       .hero{
         background-image: url('images/banner-mobile.jpg');
@@ -89,9 +101,7 @@
   <header class="hero">
     <div class="inner">
       <div class="brand">
-        <!-- LOGO：images/logo1.jpg -->
         <img class="logo" src="images/logo1.jpg" alt="Cyber Supermarket Logo" onerror="this.style.display='none'">
-        <!-- 副标题：两行，无圆点 -->
         <p class="tagline">Instant digital goods<br>Secure checkout</p>
       </div>
       <div class="cta">
@@ -101,7 +111,7 @@
     </div>
   </header>
 
-  <!-- 商品区域（保持与 A4 一致） -->
+  <!-- 商品区域 -->
   <main class="wrap" id="shop">
     <script>
       !function(e){
@@ -124,7 +134,7 @@
       data-category-id="153369" data-category-allow-child="1"></span>
   </main>
 
-  <!-- 默认九宫格视图（保持不变） -->
+  <!-- 默认九宫格视图 -->
   <script>
     (function () {
       function pickGrid() {
