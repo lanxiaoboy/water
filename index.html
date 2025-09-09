@@ -20,7 +20,7 @@
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#fff;color:#222}
     a{text-decoration:none;color:inherit}
 
-    /* Banner / Hero（保持 A3 的高度与对齐） */
+    /* Banner / Hero（与 A4 相同） */
     .hero{
       background-image: url('images/banner-desktop.jpg');
       background-size: cover;
@@ -32,7 +32,7 @@
     }
     .hero .inner{max-width:1100px;margin:0 auto;display:flex;gap:18px;align-items:center}
 
-    /* 品牌区：仅 LOGO + 副标题 */
+    /* 品牌区：LOGO 放大到 150×150，右侧仅副标题（两行） */
     .brand{
       display:flex;align-items:center;gap:16px;
       background:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
@@ -40,19 +40,20 @@
       padding:10px 14px;border-radius:12px;
       backdrop-filter: blur(2px);
     }
-    /* LOGO 放大 2 倍：60->120（桌面），44->88（移动） */
     .brand .logo{
-      width:120px; height:120px; object-fit:cover;
+      width:150px; height:150px; object-fit:cover;
       border-radius:12px; border:1px solid rgba(255,255,255,.18);
       box-shadow:0 6px 18px rgba(0,0,0,.18);
+      flex:0 0 auto;
     }
-    /* 去掉标题，仅保留副标题并增强可读性 */
     .tagline{
-      font-size:18px;                /* A3 的 14 → 18 */
-      font-weight:600;
-      opacity:.96;
+      font-size:22px;               /* A4 的 18 → 22 */
+      font-weight:700;
+      line-height:1.25;
+      margin:0;                     /* 与 LOGO 垂直对齐 */
+      opacity:.98;
       text-shadow:0 1px 6px rgba(0,0,0,.28);
-      margin:0;                      /* 与 LOGO 垂直对齐 */
+      white-space:normal;
     }
 
     .cta{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
@@ -66,7 +67,7 @@
     .wrap{max-width:1100px;margin:24px auto;padding:0 16px}
     .digiseller-body a:hover{opacity:.9}
 
-    /* 移动端：LOGO 88×88，副标题稍小 */
+    /* 移动端：LOGO 110×110，副标题略小 */
     @media (max-width:768px){
       .hero{
         background-image: url('images/banner-mobile.jpg');
@@ -74,8 +75,8 @@
         padding:24px 16px 16px;
         min-height:150px;
       }
-      .brand .logo{ width:88px; height:88px }
-      .tagline{ font-size:16px }
+      .brand .logo{ width:110px; height:110px }
+      .tagline{ font-size:18px; line-height:1.3 }
     }
 
     footer{margin:40px 0 24px;text-align:center;color:#777;font-size:13px}
@@ -87,10 +88,10 @@
   <header class="hero">
     <div class="inner">
       <div class="brand">
-        <!-- LOGO：使用 images/logo1.jpg -->
+        <!-- LOGO：images/logo1.jpg -->
         <img class="logo" src="images/logo1.jpg" alt="Cyber Supermarket Logo" onerror="this.style.display='none'">
-        <!-- 只保留副标题 -->
-        <p class="tagline">Instant digital goods • Secure checkout</p>
+        <!-- 副标题：两行，无圆点 -->
+        <p class="tagline">Instant digital goods<br>Secure checkout</p>
       </div>
       <div class="cta">
         <a class="btn" href="#shop">Browse products</a>
@@ -99,7 +100,7 @@
     </div>
   </header>
 
-  <!-- 商品区域（保持不变） -->
+  <!-- 商品区域（保持与 A4 一致） -->
   <main class="wrap" id="shop">
     <script>
       !function(e){
